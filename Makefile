@@ -10,5 +10,5 @@ export UID
 export GID
 export USER
 
-up:
-	docker compose up -d
+#up:
+#	docker compose up -d
