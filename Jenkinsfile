@@ -14,16 +14,25 @@ pipeline {
             steps {
                 sshagent(credentials: ['aws-ec2']) {
                     sh '''
-                        ssh -i "/var/jenkins_home/.ssh/key-for-ec2.pem" ubuntu@ec2-54-152-214-162.compute-1.amazonaws.com
+                        ssh -i "/var/jenkins_home/.ssh/key-for-ec2.pem" ubuntu@ec2-54-152-214-162.compute-1.amazonaws.com whoami
                     '''
                 }
             }
         }        
-
+        stage("Clear all running docker containers") {
+            steps {
+                script {
+                    try {
+                        sh 'docker rm -f $(docker ps -a -q)'
+                    } catch (Exception e) {
+                        echo 'No running container to clear up...'
+                    }
+                }
+            }
+        }
         stage("Start Docker") {
             steps {
-   
-                sh 'docker compose up -d'
+                sh 'make up'
                 sh 'docker compose ps'
             }
         }
