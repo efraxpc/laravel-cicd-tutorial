@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['aws-ec2']) {
                     sh '''
-                        ssh -i "/Users/efraincolmenares/.ssh" ec2-user@54.152.214.162 whoami
+                        ssh -i "/Users/efraincolmenares/.ssh/key-for-ec2.pem" ubuntu@ec2-54-152-214-162.compute-1.amazonaws.com
                     '''
                 }
             }
