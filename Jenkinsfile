@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['aws-ec2']) {
                     sh '''
-                        ssh -i "/var/jenkins_home/.ssh/key-for-ec2.pem" ec2-user@54.152.214.162 whoami
+                        ssh -i "/Users/efraincolmenares/.ssh" ec2-user@54.152.214.162 whoami
                     '''
                 }
             }
